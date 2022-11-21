@@ -21,9 +21,9 @@ client.once('ready', async () => {
 
     async function post() {
         if (!fs.existsSync('./questions.json')) return;
-        const questions = JSON.parse(fs.readFileSync('./questions.json'));
+        let questions = JSON.parse(fs.readFileSync('./questions.json')).qotd;
         const question = questions[Math.floor(Math.random()*questions.length)];
-        const user = await client.users.fetch(question.user.id);
+        const user = await client.users.fetch(question.user);
         const server = await client.guilds.fetch(guildId);
         const channel = await server.channels.fetch(channelId);
 

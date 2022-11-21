@@ -14,6 +14,10 @@ module.exports = {
                 .setRequired(true)
         ),
     execute: async interaction => {
+        if (interaction.guild) {
+            interaction.reply({ content: "Please use this command only in DMs.", ephemeral: true});
+            return;
+        }
         await interaction.deferReply();
         if (!fs.existsSync('./questions.json'))
             fs.writeFileSync('./questions.json', '{"qotd": []}');
@@ -26,7 +30,7 @@ module.exports = {
             id: id
         });
         fs.writeFileSync('./questions.json', JSON.stringify({"qotd": questions}));
-        interaction.editReply({ content: `Question added to list: ${question}`, ephemeral: true });
+        interaction.editReply(`Question added to list: ${question}`);
 
         let me = await interaction.client.users.fetch(ownerId);
         const row = new ActionRowBuilder({
