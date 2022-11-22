@@ -41,7 +41,7 @@ client.once('ready', async () => {
         fs.writeFileSync('./questions.json', JSON.stringify(questions));
     }
     
-    new CronJob('0 8 * * *', post).start();
+    new CronJob('0 13 * * *', post).start();
 
     if (process.env.FORCEREMIND == 'true') {
 		await new Promise(resolve => setTimeout(resolve, 5000));
