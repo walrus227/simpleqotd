@@ -38,7 +38,7 @@ client.once('ready', async () => {
         channel.send({ embeds: [embed] });
 
         questions = questions.filter(e => e.id !== question.id);
-        fs.writeFileSync('./questions.json', JSON.stringify(questions));
+        fs.writeFileSync('./questions.json', JSON.stringify({"qotd":questions}));
     }
     
     new CronJob('0 13 * * *', post).start();
